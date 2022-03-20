@@ -1,0 +1,14 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "currency converter server",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "author": "nikolay",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
