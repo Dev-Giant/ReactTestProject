@@ -20,15 +20,14 @@ const calculateRate = (param) => {
             result = 1.11;
             break;
         default:
-            result =1.95;
+            result = 1;
             break;
     }
     return result;
 }
 
-const getRate = async (req, res) => {
+export const getRate = async (req, res) => {
     try {
-        console.log(req.params)
         const { id: _id } = req.params;
         const result = await calculateRate(_id);
         res.status(200).json({

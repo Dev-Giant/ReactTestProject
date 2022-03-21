@@ -1,8 +1,15 @@
-import { useState } from 'react';
-import { Heading, Text, Box, Grid, Button, Input } from '@chakra-ui/react';
+import { useState, useEffect } from 'react';
+import { Heading, Text, Box, Grid, Input } from '@chakra-ui/react';
 import { Select, chakraComponents } from "chakra-react-select";
+import { useDispatch, useSelector } from 'react-redux';
+import { getRate } from '../redux/actions/currency';
 
 const CurrencyConverter = () => {
+    const listRate = useSelector(state => state.rate);
+    const { rate } = listRate;
+    console.log(rate);
+    const dispatch = useDispatch();
+    const [temprate, setTempRate] = useState(1.95);
     const currencies = [
         { value: 'USD', label: 'USD - US Dollar', comment: 'US Dollars',
         icon: <img loading="lazy" width="20" style = {{marginRight: '10px'}} src={`https://flagcdn.com/w20/us.png`}
@@ -16,16 +23,9 @@ const CurrencyConverter = () => {
     ];
     const [currency1, setCurrency1] = useState(currencies[1]);
     const [currency2, setCurrency2] = useState(currencies[2]);
-    const [rate, setRate] = useState(1.95);
     const [amount, setAmount] = useState(1);
     const handleAmount = (e) => {
         setAmount(e.target.value);
-    }
-    const handleCurrency1 = (value) => {
-        setCurrency1(value);
-    }
-    const handleCurrency2 = (value) => {
-        setCurrency2(value);
     }
     const customComponents = {
         Option: ({ children, ...props }) => (
@@ -34,6 +34,15 @@ const CurrencyConverter = () => {
           </chakraComponents.Option>
         ),
     };
+    useEffect(() => {
+        dispatch(getRate('EUR', 'BGN'));
+    }, [dispatch]);
+    useEffect(() => {
+        setTempRate(rate);
+    }, [rate]);
+    useEffect(() => {
+        dispatch(getRate(currency1.value, currency2.value));
+    }, [currency1, currency2]);
     return(
         <Box maxWidth='1150px' position = 'relative'>
             <Heading as='h1' color='white'>Currency Converter</Heading>
@@ -48,7 +57,7 @@ const CurrencyConverter = () => {
                 boxShadow = '0px 6px 12px #2337501e'
                 marginTop = '40px'>
                 <Grid 
-                    templateColumns = 'minmax(100px, 1fr) minmax(100px, 1fr) auto minmax(100px, 1fr)' 
+                    templateColumns = 'minmax(300px, 1fr) minmax(300px, 1fr) minmax(300px, 1fr)' 
                     autoFlow='column' gap={6} alignItems = 'end'>
                     <Box>
                         <Heading as = 'h4' size ='sm' marginBottom='20px' align='left'>Amount</Heading>
@@ -60,11 +69,8 @@ const CurrencyConverter = () => {
                             value = {currency1}
                             options={currencies}
                             components={customComponents}
-                            onChange = {handleCurrency1}
+                            onChange = {setCurrency1}
                         />
-                    </Box>
-                    <Box>
-                        <Button borderRadius='50%'>X</Button>
                     </Box>
                     <Box>
                         <Heading as = 'h4' size ='sm' marginBottom='20px' align='left'>To</Heading>
@@ -72,15 +78,15 @@ const CurrencyConverter = () => {
                             value={currency2}
                             options={currencies}
                             components={customComponents}
-                            onChange = {handleCurrency2}
+                            onChange = {setCurrency2}
                         />
                     </Box>
                 </Grid>
                 <Box marginTop = '20px'>
                     <Heading as = 'h4' size = 'sm' align = 'left'>{amount} {currency1.comment} =</Heading>
-                    <Heading as = 'h2' align = 'left' marginTop = '20px'>{ Math.round(amount * rate * 100) /100 } {currency2.comment}</Heading>
-                    <Text marginTop = '40px' align = 'left'>1 {currency1.value} = {rate} {currency2.value}</Text>
-                    <Text align = 'left'>1 {currency2.value} = { Math.round(1.0 / rate * 100) / 100 } {currency1.value}</Text>
+                    <Heading as = 'h2' align = 'left' marginTop = '20px'>{ Math.round(amount * temprate * 100) /100 } {currency2.comment}</Heading>
+                    <Text marginTop = '40px' align = 'left'>1 {currency1.value} = {temprate} {currency2.value}</Text>
+                    <Text align = 'left'>1 {currency2.value} = { Math.round(1.0 / temprate * 100) / 100 } {currency1.value}</Text>
                 </Box>
             </Box>
         </Box>

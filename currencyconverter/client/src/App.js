@@ -1,4 +1,4 @@
-import { Flex, Box, Heading } from '@chakra-ui/react';
+import { Flex, Box } from '@chakra-ui/react';
 import './App.css';
 import CurrencyConverter from "./components/CurrencyConverter"
 import CurrencyInformation from './components/CurrencyInformation';

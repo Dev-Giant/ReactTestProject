@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 
 import { currencyReducer } from '../reducers/currency';
 
-const currencyReducer = combineReducers({
+const rootReducer = combineReducers({
   rate: currencyReducer,
 });
 
