@@ -1,4 +1,4 @@
-import { getRate } from './controllers/rate'
+const getRate = require('./controllers/rate');
 const express = require('express');
 const app = express();
 const port = 8080;

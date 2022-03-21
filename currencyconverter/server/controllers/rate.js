@@ -26,7 +26,7 @@ const calculateRate = (param) => {
     return result;
 }
 
-export const getRate = async (req, res) => {
+const getRate = async (req, res) => {
     try {
         console.log(req.params)
         const { id: _id } = req.params;

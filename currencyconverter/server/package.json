@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "currency converter server",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node index.js",
     "test": "npm run test"
   },
   "author": "nikolay",
