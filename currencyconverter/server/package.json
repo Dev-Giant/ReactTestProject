@@ -4,11 +4,13 @@
   "description": "currency converter server",
   "main": "index.js",
   "scripts": {
+    "start": "react-scripts start",
     "test": "npm run test"
   },
   "author": "nikolay",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "react-scripts": "^5.0.0"
   }
 }
