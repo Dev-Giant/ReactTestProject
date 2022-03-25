@@ -1,0 +1,31 @@
+@maindiv-base-margin: 200px;
+@base-margin: 20px;
+.mainDiv { 
+    margin-top: @maindiv-base-margin;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    margin-bottom: @base-margin + 10px !important;
+}
+
+p {
+    margin-bottom: @base-margin !important;
+}
+
+a{
+    text-decoration: none;
+}
+
+.link{
+    margin: @base-margin;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 400px;
+}
