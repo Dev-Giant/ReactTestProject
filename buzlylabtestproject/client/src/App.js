@@ -4,7 +4,7 @@ import { Home } from "./pages/Home"
 import { NewMessage } from './pages/NewMessage';
 import { MessageDetail } from './pages/MessageDetail';
 import { Messages } from './pages/Messages';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route, Redirect } from "react-router-dom"
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
           <Route path="/" element={<Home/>}/>
           <Route path="/message" element={<NewMessage/>}/>
           <Route path="/message/:messageid" element={<MessageDetail/>}/>
-          <Route path="/messages" element={<Messages/>}/>
+          <Route path="/message/all" element={<Messages/>}/>
         </Routes>
       </Router>
     </>
